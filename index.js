@@ -4,6 +4,13 @@ const mongoose = require("mongoose")
 const app = express()
 const dotenv = require("dotenv")
 const userRoutes = require("./routes/userRoutes")
+const cors = require("cors")
+
+const corsOptions = {
+  origin: "http://localhost:5173" // Allow only this origin
+}
+
+app.use(cors(corsOptions))
 
 // Load environment variables
 dotenv.config()
