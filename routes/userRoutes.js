@@ -8,6 +8,8 @@ const bcrypt = require("bcrypt")
 router.post("/users", async (req, res) => {
   try {
     const { name, email, password } = req.body
+    // const user = await User.create(req.body)
+    // res.status(200).json(user)
     const salt = await bcrypt.genSalt(10)
     const hashedPassword = await bcrypt.hash(password, salt)
 
