@@ -1,8 +1,9 @@
 // routes/userRoutes.js
 const express = require("express")
 const router = express.Router()
-const User = require("../models/Users")
+const User = require("../models/User")
 const bcrypt = require("bcrypt")
+// const createUserResponseDTO = require("../models/createUserResponseDTO")
 
 // Create a new user
 router.post("/users", async (req, res) => {
@@ -52,6 +53,7 @@ router.get("/users/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id)
     if (!user) return res.status(404).json({ msg: "User not found" })
+    // const userDto = createUserResponseDTO(user)
     res.json(user)
   } catch (err) {
     res.status(500).json({ error: err.message })
