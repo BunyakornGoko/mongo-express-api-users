@@ -3,7 +3,7 @@ const express = require("express")
 const router = express.Router()
 const User = require("../models/User")
 const bcrypt = require("bcrypt")
-// const createUserResponseDTO = require("../models/createUserResponseDTO")
+const { createUserResponseDTO } = require("../models/createUserResponseDTO")
 
 // Create a new user
 router.post("/users", async (req, res) => {
@@ -32,7 +32,8 @@ router.post("/users", async (req, res) => {
     })
 
     const savedUser = await newUser.save()
-    res.status(201).json(savedUser)
+    const userDto = createUserResponseDTO(savedUser)
+    res.status(201).json(userDto)
   } catch (err) {
     res.status(500).json({ error: err.message })
   }
@@ -42,7 +43,8 @@ router.post("/users", async (req, res) => {
 router.get("/users", async (req, res) => {
   try {
     const users = await User.find()
-    res.json(users)
+    const userDtos = users.map((user) => createUserResponseDTO(user))
+    res.json(userDtos)
   } catch (err) {
     res.status(500).json({ error: err.message })
   }
@@ -53,8 +55,8 @@ router.get("/users/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id)
     if (!user) return res.status(404).json({ msg: "User not found" })
-    // const userDto = createUserResponseDTO(user)
-    res.json(user)
+    const userDto = createUserResponseDTO(user)
+    res.json(userDto)
   } catch (err) {
     res.status(500).json({ error: err.message })
   }
@@ -68,7 +70,8 @@ router.put("/users/:id", async (req, res) => {
       runValidators: true
     })
     if (!updatedUser) return res.status(404).json({ msg: "User not found" })
-    res.json(updatedUser)
+    const userDto = createUserResponseDTO(updatedUser)
+    res.status(201).json(userDto)
   } catch (err) {
     res.status(500).json({ error: err.message })
   }
