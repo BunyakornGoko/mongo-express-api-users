@@ -18,6 +18,9 @@ app.use((req, res, next) => {
   next()
 })
 
+//static assets in the public
+app.use(express.static("public"))
+
 app.options("", cors(corsOptions))
 app.use(cors(corsOptions))
 
