@@ -7,7 +7,7 @@ const userRoutes = require("./routes/userRoutes")
 const cors = require("cors")
 
 const corsOptions = {
-  origin: "https://make-user-react.vercel.app/", // Allow only this origin
+  origin: "https://make-user-react.vercel.app", // Allow only this origin
   methods: ["GET", "POST", "PUT", "DELETE"]
 }
 
