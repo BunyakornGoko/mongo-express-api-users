@@ -6,11 +6,11 @@ const dotenv = require("dotenv")
 const userRoutes = require("./routes/userRoutes")
 const cors = require("cors")
 
-const corsOptions = {
-  origin: "https://make-user-react.vercel.app", // Allow only this origin
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
-}
+// const corsOptions = {
+//   origin: "https://make-user-react.vercel.app", // Allow only this origin
+//   methods: ["GET", "POST", "PUT", "DELETE"],
+//   credentials: true
+// }
 
 // Set headers for credentials
 // app.use((req, res, next) => {
@@ -24,7 +24,7 @@ const corsOptions = {
 app.options("", cors(corsOptions))
 app.use(cors(corsOptions))
 
-// app.use(cors())
+app.use(cors())
 
 // Load environment variables
 dotenv.config()
